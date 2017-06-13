@@ -1,4 +1,4 @@
- statipackage sqlite.msabukwaik.com.sqlite;
+package sqlite.msabukwaik.com.sqlite;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
