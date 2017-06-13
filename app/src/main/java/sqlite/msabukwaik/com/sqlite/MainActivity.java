@@ -2,6 +2,8 @@ package sqlite.msabukwaik.com.sqlite;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,13 +18,15 @@ import sqlite.msabukwaik.com.sqlite.sample.SampleDataProvider;
 public class MainActivity extends AppCompatActivity {
 
     List<DataItem> dateItemList = SampleDataProvider.dataItemList;
+    List<String> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tv = (TextView) findViewById(R.id.out);
+        //Access list view
+        ListView lv = (ListView) findViewById(android.R.id.list);
 
         //Order the list of dateitems
         Collections.sort(dateItemList, new Comparator<DataItem>() {
@@ -33,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         for (DataItem item : dateItemList) {
-            tv.setText(item.getItemName() + "\n");
+            items.add(item.getItemName());
         }
+
+        Collections.sort(items);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, items);
+        lv.setAdapter(arrayAdapter);
     }
 }
